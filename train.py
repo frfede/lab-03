@@ -2,7 +2,7 @@ from torchvision.datasets import ImageFolder
 import torchvision.transforms as T
 from torch.optim import SGD
 from torch.utils.data import DataLoader
-from torch import nn
+from torch import nn, save
 from models import ConvNet
 
 def train(epoch, model, train_loader, criterion, optimizer):
@@ -28,6 +28,7 @@ def train(epoch, model, train_loader, criterion, optimizer):
 
     train_loss = running_loss / len(train_loader)
     train_accuracy = 100. * correct / total
+    save(model, "./checkpoints/trained_model.pt")
     print(f'Train Epoch: {epoch} Loss: {train_loss:.6f} Acc: {train_accuracy:.2f}%')
 
 

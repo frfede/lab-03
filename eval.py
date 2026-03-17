@@ -1,7 +1,7 @@
 from torchvision.datasets import ImageFolder
 import torchvision.transforms as T
 from torch.utils.data import DataLoader
-from torch import nn
+from torch import nn, load
 from models import ConvNet
 from torch import no_grad
 
@@ -39,7 +39,7 @@ transform = T.Compose([
 tiny_imagenet_dataset_val = ImageFolder(root='dataset/tiny-imagenet/tiny-imagenet-200/val', transform=transform)
 
 
-model = ConvNet().cuda()
+model = load("./checkpoints/trained_model.pt")
 loss = nn.CrossEntropyLoss()
 
 val_loader = DataLoader(tiny_imagenet_dataset_val, batch_size=32, shuffle=False)
